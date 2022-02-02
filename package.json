@@ -1,15 +1,23 @@
 {
-  "name": "untitled_art_engine",
+  "name": "untitledartengine",
   "version": "1.0.0",
-  "description": "Art engine based off HashLips Art Engine is a tool used to create multiple different instances of artworks based on provided layers.",
+  "description": "Art Engine",
   "main": "index.js",
   "scripts": {
-    "build": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "NA",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srtalaie/untitledArtEngine.git"
+  },
+  "author": "srtalaie",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srtalaie/untitledArtEngine/issues"
+  },
+  "homepage": "https://github.com/srtalaie/untitledArtEngine#readme",
   "dependencies": {
-    "canvas": "^2.8.0"
+    "canvas": "^2.9.0",
+    "path": "^0.12.7"
   }
 }
