@@ -11,12 +11,13 @@ const canvas = createCanvas(width, height)
 const ctx = canvas.getContext('2d')
 
 //Amount you want to generate based on passed argument
-const edition = args.length > 0 ? Number(args[0]) : 1
+const editionSize = args.length > 0 ? Number(args[0]) : 1
 
 let metadata = []
 let attributes = []
 let hash = []
 let decodedHash = []
+let dnaList = []
 
 const saveLayer = (_canvas, _edition) => {
     fs.writeFileSync(`./build/${_edition}.png`, _canvas.toBuffer('image/png'))
@@ -63,16 +64,21 @@ const drawLayer = async (_layer, _edition) => {
     saveLayer(canvas, _edition)
 }
 
-for(let i = 1; i <= edition; i++){
-    layers.forEach((layer) => {
-        drawLayer(layer, i)
-    })
-    addMetaData(i)
-    console.log(`Creating edition ${i}`)
+const writeMetadata = () => {
+    fs.writeFileSync('./build/_metadata.json', JSON.stringify(metadata))
 }
 
-fs.readFile('./build/_metadata.json', (err, data) => {
-    if (err) throw err
+const generateArt = () => {
+    let editionCount = 1
+    while(editionCount <= editionSize){
+        layers.forEach((layer) => {
+            drawLayer(layer, editionCount)
+        })
+        addMetaData(editionCount)
+        console.log(`Creating edition ${editionCount}`)
+        editionCount++
+    }   
+}
 
-    fs.writeFileSync('./build/_metadata.json', JSON.stringify(metadata))
-})
+generateArt()
+writeMetadata()
